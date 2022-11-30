@@ -59,7 +59,7 @@ helm_uninstall () {
     if [ "$DRY_RUN" = true ]; then
         UNINSTALL_COMMAND="${UNINSTALL_COMMAND} --dry-run"
     fi
-    UNINSTALL_COMMAND="${UNINSTALL_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH:-helm/}"
+    UNINSTALL_COMMAND="${UNINSTALL_COMMAND} ${DEPLOY_NAME}"
     echo "Executing: ${UNINSTALL_COMMAND}"
     ${UNINSTALL_COMMAND}
 }
