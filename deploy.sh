@@ -65,7 +65,7 @@ helm_uninstall () {
 }
 
 initialize
-if [ "$UNINSTALL" = true]; then
+if [ "$UNINSTALL" = true ]; then
     helm_uninstall
 else
     helm_install_or_diff
