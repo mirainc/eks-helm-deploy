@@ -50,6 +50,9 @@ inputs:
     debug:
         description: 'Enable verbose output'
         required: false
+    uninstall:
+        description: 'Uninstall the release'
+        required: false
 
 runs:
     using: 'docker'
