@@ -50,6 +50,9 @@ inputs:
     debug:
         description: 'Enable verbose output'
         required: false
+    uninstall:
+        description: 'Uninstall the release'
+        required: false
 
 runs:
     using: 'docker'
@@ -69,5 +72,5 @@ runs:
         DRY_RUN: ${{ inputs.dry-run }}
         DIFF: ${{ inputs.diff }}
         TIMEOUT: ${{ inputs.timeout }}
-       
+        UNINSTALL: ${{ inputs.uninstall }}
 
