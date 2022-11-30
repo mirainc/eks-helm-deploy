@@ -49,7 +49,7 @@ helm_uninstall () {
         DRY_RUN="$DIFF"
     fi
 
-    UNINSTALL_COMMAND="helm uninstall --wait --atomic --timeout ${TIMEOUT}"
+    UNINSTALL_COMMAND="helm uninstall --wait --timeout ${TIMEOUT}"
     if [ -n "$DEPLOY_NAMESPACE" ]; then
         UNINSTALL_COMMAND="${UNINSTALL_COMMAND} -n ${DEPLOY_NAMESPACE}"
     fi
