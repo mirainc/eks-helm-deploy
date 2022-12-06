@@ -12,7 +12,7 @@ ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 
 # Install the toolset.
 RUN apt-get -y update && apt-get -y install curl git \
-    && pip install awscli \
+    && pip install awscli sops \
     && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash \
     && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
     && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl \
