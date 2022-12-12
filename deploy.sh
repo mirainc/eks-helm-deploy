@@ -10,6 +10,12 @@ initialize () {
 
     # Helm Dependency Update
     helm dependency update ${DEPLOY_CHART_PATH:-helm/}
+
+    # Add repository.  The user doesn't supply a name, and it's only temporary,
+    # until the install command, so just hardcode the name to "current"
+    if [ -n "$REPOSITORY" ]; then
+        helm repo add current "$REPOSITORY"
+    fi
 }
 
 helm_install_or_diff () {
@@ -36,7 +42,23 @@ helm_install_or_diff () {
     if [ "$DRY_RUN" = true ]; then
         UPGRADE_COMMAND="${UPGRADE_COMMAND} --dry-run"
     fi
-    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH:-helm/}"
+
+    # Restructure chart name to repo/chart, if a repo was specified.  It's
+    # hardcoded to "current" above.
+    if [ -n "$REPOSITORY" ]; then
+        # Chart is a repository
+        if [ -z "$DEPLOY_CHART_PATH" ]; then
+            echo "Must specify a chart if pulling from a repository"
+            exit 1
+        fi
+        chart=current/"$DEPLOY_CHART_PATH"
+    else
+        # Chart is a path.  Default to helm/.
+        chart=${DEPLOY_CHART_PATH:-helm/}
+    fi
+
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} $chart"
+
     echo "Executing: ${UPGRADE_COMMAND}"
     ${UPGRADE_COMMAND}
 }

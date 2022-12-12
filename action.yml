@@ -53,6 +53,10 @@ inputs:
     uninstall:
         description: 'Uninstall the release'
         required: false
+    repository:
+        description: 'Download and install the chart from a repository.  If this option is specified, chart becomes a path.'
+        required: false
+        default: ""
 
 runs:
     using: 'docker'
@@ -73,4 +77,5 @@ runs:
         DIFF: ${{ inputs.diff }}
         TIMEOUT: ${{ inputs.timeout }}
         UNINSTALL: ${{ inputs.uninstall }}
+        REPOSITORY: ${{ inputs.repository }}
 
